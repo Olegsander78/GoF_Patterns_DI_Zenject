@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour
@@ -8,7 +9,7 @@ public class Enemy : MonoBehaviour
     private float _speed;
     private float _weight;
 
-    public virtual void Initialize(int health, float speed, float weight)
+    public void Initialize(int health, float speed, float weight)
     {
         _health = health;
         _speed = speed;

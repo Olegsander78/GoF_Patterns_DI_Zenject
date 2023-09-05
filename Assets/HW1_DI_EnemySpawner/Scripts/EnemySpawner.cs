@@ -3,28 +3,33 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemySpawner : MonoBehaviour
+public class EnemySpawner 
 {
     public Action<Enemy> OnEnemySpawned;
-    
-    [SerializeField] private float _spawnCooldown;
-    [SerializeField] private List<Transform> _spawnPoints;
 
-    [SerializeField] private EnemyFactory _enemyFactory;
+    private float _spawnCooldown;
+    private List<Transform> _spawnPoints = new List<Transform>();
+    private EnemyFactory _enemyFactory;
+    private Coroutine _coroutine;
 
-    private Coroutine _spawn;
+    public EnemySpawner(float spawnCooldown, List<Transform> spawnPoints, EnemyFactory enemyFactory)
+    {
+        _spawnCooldown = spawnCooldown;
+        _spawnPoints = spawnPoints;
+        _enemyFactory = enemyFactory;
+    }
 
     public void StartWork()
     {
         StopWork();
 
-        _spawn = StartCoroutine(Spawn());
+        _coroutine = CoroutineRunner.Instance.StartCoroutine(Spawn());
     }
 
     public void StopWork()
     {
-        if (_spawn != null)
-            StopCoroutine(_spawn);
+        if (_coroutine != null)
+            CoroutineRunner.Instance.StopCoroutine(_coroutine);
     }
 
     private IEnumerator Spawn()
@@ -33,7 +38,7 @@ public class EnemySpawner : MonoBehaviour
         {
             Enemy enemy = _enemyFactory.Get((EnemyType)UnityEngine.Random.Range(0, Enum.GetValues(typeof(EnemyType)).Length));
             enemy.MoveTo(_spawnPoints[UnityEngine.Random.Range(0, _spawnPoints.Count)].position);
-            OnEnemySpawned?.Invoke(enemy);
+            OnEnemySpawned?.Invoke(enemy);            
             yield return new WaitForSeconds(_spawnCooldown);
         }
     }

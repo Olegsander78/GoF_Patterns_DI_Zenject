@@ -1,11 +1,15 @@
 using UnityEngine;
+using Zenject;
 
 public class Bootstrap : MonoBehaviour
 {
-    [SerializeField] private EnemySpawner _spawner;
-    [SerializeField] private float _totalEnemiesWeight;
-    
+    [SerializeField] private float _totalEnemiesWeight;    
+
+    private EnemySpawner _spawner;    
     private float _currentTotalEnemiesWeight;
+
+    [Inject]
+    private void Construct(EnemySpawner enemySpawner) => _spawner = enemySpawner;
 
     private void Awake()
     {
@@ -14,13 +18,16 @@ public class Bootstrap : MonoBehaviour
         _spawner.OnEnemySpawned += CalculateTotalEnemiesWeight;
 
         _spawner.StartWork();
-
-
     }
 
-    private void OnDisable()
+    private void OnDisable() => _spawner.OnEnemySpawned -= CalculateTotalEnemiesWeight;
+
+    [ContextMenu("Reset Spawn")]
+    public void ResetSpawn()
     {
-        _spawner.OnEnemySpawned -= CalculateTotalEnemiesWeight;
+        _currentTotalEnemiesWeight = 0;
+
+        _spawner.StartWork();
     }
 
     private void CalculateTotalEnemiesWeight(Enemy enemy)
