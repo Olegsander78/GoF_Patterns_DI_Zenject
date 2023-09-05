@@ -14,13 +14,13 @@ public class BootstrapMediatorInstaller : MonoInstaller
         Container.BindInterfacesAndSelfTo<MediatorBootstrap>().AsSingle().NonLazy();        
     }
 
+    private void BindMediator()
+    {
+        Container.Bind<GameplayMediator>().AsSingle();        
+    }
+
     private void BindUIPanel()
     {
         Container.Bind<DefeatPanel>().FromComponentInHierarchy().AsSingle();
-    }
-
-    private void BindMediator()
-    {
-        Container.Bind<GameplayMediator>().FromComponentInHierarchy().AsSingle();        
     }
 }

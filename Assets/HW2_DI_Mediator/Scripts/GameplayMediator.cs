@@ -1,11 +1,16 @@
 using UnityEngine;
 
-public class GameplayMediator : MonoBehaviour
+public class GameplayMediator 
 {
-    [SerializeField] private DefeatPanel _defeatPanel;
+    private DefeatPanel _defeatPanel;
     private Level _level;
 
-    private void OnDisable()
+    public GameplayMediator(DefeatPanel defeatPanel)
+    {
+        _defeatPanel = defeatPanel;
+    }
+
+    ~GameplayMediator()
     {
         _level.Defeat -= OnLevelDefeat;
     }
