@@ -1,13 +1,20 @@
 using UnityEngine;
+using Zenject;
 
-public class MediatorBootstrap : MonoBehaviour
+public class MediatorBootstrap : IInitializable, ITickable
 {
-    [SerializeField] private GameplayMediator _gameplayMediator;
-    [SerializeField] private DefeatPanel _defeatPanel;
+    private GameplayMediator _gameplayMediator;
+    private DefeatPanel _defeatPanel;
 
     private Level _level;
 
-    private void Awake()
+    public MediatorBootstrap(GameplayMediator gameplayMediator, DefeatPanel defeatPanel)
+    {
+        _gameplayMediator = gameplayMediator;
+        _defeatPanel = defeatPanel;        
+    }
+
+    public void Initialize()
     {
         _level = new Level();
 
@@ -17,7 +24,7 @@ public class MediatorBootstrap : MonoBehaviour
         _level.Start();
     }
 
-    private void Update()
+    public void Tick()
     {
         if (Input.GetKeyUp(KeyCode.Space))
             _level.OnDefeat();

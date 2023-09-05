@@ -19,7 +19,7 @@ public class EnemiesSpawnInstaller : MonoInstaller
 
     private void BindEnemyCreation()
     {
-        Container.Bind<EnemyFactory>().AsSingle().NonLazy();
+        Container.Bind<EnemyFactory>().AsSingle();
         Container.Bind<float>().FromInstance(_spawnCooldown).WhenInjectedInto<EnemySpawner>();
         Container.Bind<List<Transform>>().FromInstance(_spawnPoints).WhenInjectedInto<EnemySpawner>();
     }    

@@ -1,7 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using Zenject;
 
 public class BootstrapMediatorInstaller : MonoInstaller
@@ -9,10 +5,22 @@ public class BootstrapMediatorInstaller : MonoInstaller
     public override void InstallBindings()
     {
         BindBootstrap();
+        BindMediator();
+        BindUIPanel();
     }
 
     private void BindBootstrap()
     {
-        throw new NotImplementedException();
+        Container.BindInterfacesAndSelfTo<MediatorBootstrap>().AsSingle().NonLazy();        
+    }
+
+    private void BindUIPanel()
+    {
+        Container.Bind<DefeatPanel>().FromComponentInHierarchy().AsSingle();
+    }
+
+    private void BindMediator()
+    {
+        Container.Bind<GameplayMediator>().FromComponentInHierarchy().AsSingle();        
     }
 }
