@@ -2,14 +2,12 @@ using Zenject;
 using UnityEngine.SceneManagement;
 using UnityEngine;
 
-public class GlobalInstaller : MonoInstaller
+public class GlobalMiniGameInstaller : MonoInstaller
 {
-    private const string SCENE_HW1_SPAWNER = "EnemySpawnerScene";
-    private const string SCENE_HW2_MEDIATOR = "MediatorScene";
-    private const string SCENE_HW3_MINIGAME = "LevelMiniGame";
-
     public override void InstallBindings()
     {
+        BindLoader();
+        
         //BindRoutine();
 
         //if(SystemInfo.deviceType == DeviceType.Desktop)
@@ -28,6 +26,13 @@ public class GlobalInstaller : MonoInstaller
         //        // Global bind for hw3
         //    }
         //}        
+    }
+
+    private void BindLoader()
+    {
+        Container.Bind<ZenjectSceneLoaderWrapper>().AsSingle();
+        Container.BindInterfacesAndSelfTo<SceneLoader>().AsSingle();
+        Container.BindInterfacesAndSelfTo<SceneLoadMediator>().AsSingle();
     }
 
     private void BindRoutine()
