@@ -1,21 +1,31 @@
 using System;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class GameController : MonoBehaviour
 {
     public Action OnEndedGame;
     public Action<string> OnSelectedCondition;
     public event Action OnButtonConditionClicked;
-    public ColorType ColorToPop { get => _colorToPop;}
 
     [SerializeField] private BallSpawner _ballSpawner;
-    [SerializeField] private ColorType _colorToPop;
+    public ColorType ColorToPop { get => _colorToPop;}
+    
+    private ColorType _colorToPop;
 
     private IWinCondition _winConditionStrategy;
 
     private void Start()
     {
+        _colorToPop = GetRandomColorType();
         OnButtonConditionClicked += _ballSpawner.SpawnBalls;
+    }
+
+    private ColorType GetRandomColorType()
+    {
+        var colorTypes = (ColorType[])Enum.GetValues(typeof(ColorType));
+        int randomIndex = Random.Range(0, colorTypes.Length);
+        return colorTypes[randomIndex];
     }
 
     public void SelectPopAllStrategy()
