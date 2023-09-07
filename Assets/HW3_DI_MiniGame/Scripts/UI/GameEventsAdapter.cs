@@ -8,9 +8,9 @@ public class GameEventsAdapter : MonoBehaviour
 
     private void Start()
     {
-        _eventsView.SetupOneColorButtonText($"Pop all balls of color - {_gameController.ColorToPop.ToString()} to win!");
+        //_eventsView.SetupOneColorButtonText($"Pop all balls of color - {_gameController.ColorToPop.ToString()} to win!");
 
-        _gameController.OnEndedGame += OnShowEndGameText;
+        _gameController.OnEndedGame += OnGameEnded;
         _gameController.OnSelectedCondition += OnShowConditionWinText;
     }
 
@@ -19,14 +19,15 @@ public class GameEventsAdapter : MonoBehaviour
         _eventsView.SetupConditionWinText(conditionWinText);
     }
 
-    private void OnShowEndGameText()
+    private void OnGameEnded()
     {
         _eventsView.SetupEndGameText(_endGametext);
+        _eventsView.EnableButtons();
     }    
 
     private void OnDisable()
     {
-        _gameController.OnEndedGame -= OnShowEndGameText;
+        _gameController.OnEndedGame -= OnGameEnded;
         _gameController.OnSelectedCondition -= OnShowConditionWinText;
     }
 

@@ -9,8 +9,8 @@ public class GameEventsView : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _endGameText;
     [SerializeField] private TextMeshProUGUI _oneColorButtonText;
 
-    [SerializeField] private Button _popAllButton;
-    [SerializeField] private Button _popOneColorButton;
+    [SerializeField] private Button _restartButton;
+    [SerializeField] private Button _mainMenuButton;
 
     public void SetupConditionWinText(string condition)
     {
@@ -20,10 +20,10 @@ public class GameEventsView : MonoBehaviour
         AnimateConditionTextMove();
     }
 
-    public void SetupOneColorButtonText(string buttonText)
-    {
-        _oneColorButtonText.text = buttonText;
-    }
+    //public void SetupOneColorButtonText(string buttonText)
+    //{
+    //    _oneColorButtonText.text = buttonText;
+    //}
 
     public void SetupEndGameText(string endGameText)
     {
@@ -31,10 +31,16 @@ public class GameEventsView : MonoBehaviour
         AnimateTextBounce();
     }
 
+    public void EnableButtons()
+    {
+        _restartButton.gameObject.SetActive(true);
+        _mainMenuButton.gameObject.SetActive(true);
+    }
+
     private void DisableButtons()
     {
-        _popAllButton.gameObject.SetActive(false);
-        _popOneColorButton.gameObject.SetActive(false);
+        _restartButton.gameObject.SetActive(false);
+        _mainMenuButton.gameObject.SetActive(false);
     }
 
     private void AnimateTextBounce()
