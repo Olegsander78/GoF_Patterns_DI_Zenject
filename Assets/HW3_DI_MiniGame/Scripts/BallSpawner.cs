@@ -8,7 +8,7 @@ public class BallSpawner : MonoBehaviour
     [SerializeField] private int _whiteBallsCount;
     [SerializeField] private int _greenBallsCount;
     [SerializeField] private Transform _parent;
-        
+    [SerializeField] private PositionGenerator _positionGenerator;
     public List<Ball> Balls { get { return _balls; } }
 
     private List<Ball> _balls = new List<Ball>();
@@ -17,21 +17,22 @@ public class BallSpawner : MonoBehaviour
     {
         for (int i = 0; i < _redBallsCount; i++)
         {
-            SpawnBall(ColorType.Red);
+            SpawnBall(ColorTypes.Red);
         }
         for (int i = 0; i < _whiteBallsCount; i++)
         {
-            SpawnBall(ColorType.White);
+            SpawnBall(ColorTypes.White);
         }
         for (int i = 0; i < _greenBallsCount; i++)
         {
-            SpawnBall(ColorType.Green);
+            SpawnBall(ColorTypes.Green);
         }
     }
 
-    private void SpawnBall(ColorType color)
+    private void SpawnBall(ColorTypes color)
     {
-        var position = new Vector3(Random.Range(-5f, 5f), Random.Range(-5f, 5f), 0f);
+        //var position = new Vector3(Random.Range(-5f, 5f), Random.Range(-5f, 5f), 0f);
+        var position = _positionGenerator.GetPosition();
         var ballObject = Instantiate(_ballPrefab, position, Quaternion.identity, _parent);
         ballObject.SetColor(color);
         _balls.Add(ballObject);

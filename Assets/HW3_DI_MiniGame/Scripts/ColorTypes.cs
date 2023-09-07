@@ -1,4 +1,4 @@
-public enum ColorType
+public enum ColorTypes
 {
     Red = 0,
     White = 1,

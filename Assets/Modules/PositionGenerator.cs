@@ -35,7 +35,7 @@ public class PositionGenerator : MonoBehaviour
     {
         var posEnemy = new Vector3(
             Random.Range(_centerSpawnPoint.position.x - _squareSpawn.x / 2, _centerSpawnPoint.position.x + _squareSpawn.x / 2),
-            _centerSpawnPoint.position.y,
+            Random.Range(_centerSpawnPoint.position.y - _squareSpawn.y / 2, _centerSpawnPoint.position.y + _squareSpawn.y / 2),
             Random.Range(_centerSpawnPoint.position.z - _squareSpawn.z / 2, _centerSpawnPoint.position.z + _squareSpawn.z / 2)
             );
 

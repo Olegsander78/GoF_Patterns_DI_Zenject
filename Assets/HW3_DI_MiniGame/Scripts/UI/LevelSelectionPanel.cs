@@ -29,8 +29,8 @@ public class LevelSelectionPanel : MonoBehaviour
         }
     }
 
-    private void OnLevelSelected(int level)
+    private void OnLevelSelected(int conditionGame)
     {
-        _sceneLoadMediator.GoToGamePlayLevel(new LevelLoadingData(level));
+        _sceneLoadMediator.GoToGamePlayLevel(new LevelLoadingData((ConditionGameTypes)conditionGame));
     }
 }

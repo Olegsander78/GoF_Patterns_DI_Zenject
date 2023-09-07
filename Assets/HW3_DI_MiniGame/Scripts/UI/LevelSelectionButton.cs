@@ -7,7 +7,8 @@ public class LevelSelectionButton : MonoBehaviour
 {
     public event Action<int> OnClicked;
 
-    [SerializeField, Range(1, 3)] private int _level;
+    //[SerializeField, Range(1, 3)] private int _level;
+    [SerializeField] private ConditionGameTypes _conditionGameTypes;
 
     private Button _button;
 
@@ -28,6 +29,6 @@ public class LevelSelectionButton : MonoBehaviour
 
     private void OnClick()
     {
-        OnClicked?.Invoke(_level);
+        OnClicked?.Invoke((int)_conditionGameTypes);
     }
 }

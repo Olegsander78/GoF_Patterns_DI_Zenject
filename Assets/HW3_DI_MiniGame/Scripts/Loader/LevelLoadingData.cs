@@ -14,10 +14,13 @@ public class LevelLoadingData
         }
     }
 
-    private int _level;
+    public ConditionGameTypes ConditionGame { get => _conditionGame; set => _conditionGame = value; }
 
-    public LevelLoadingData(int level)
+    private int _level;
+    private ConditionGameTypes _conditionGame;
+
+    public LevelLoadingData(ConditionGameTypes conditionGame)
     {
-        Level = level;
+        _conditionGame = conditionGame;
     }   
 }

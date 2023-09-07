@@ -6,7 +6,7 @@ public class Ball : MonoBehaviour
     [field:SerializeField] public bool IsPopped { get; private set; }
 
     public Action OnPuped;
-    public ColorType ColorBall { get; private set; }
+    public ColorTypes ColorBall { get; private set; }
 
     private Renderer _renderer;
 
@@ -15,19 +15,19 @@ public class Ball : MonoBehaviour
         _renderer = GetComponent<Renderer>();
     }
 
-    public void SetColor(ColorType color)
+    public void SetColor(ColorTypes color)
     {
         ColorBall = color;
 
         switch (color)
         {
-            case ColorType.Red:
+            case ColorTypes.Red:
                 _renderer.material.color = Color.red;
                 break;
-            case ColorType.White:
+            case ColorTypes.White:
                 _renderer.material.color = Color.white;
                 break;
-            case ColorType.Green:
+            case ColorTypes.Green:
                 _renderer.material.color = Color.green;
                 break;
         }
