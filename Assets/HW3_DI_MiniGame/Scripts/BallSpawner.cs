@@ -31,7 +31,6 @@ public class BallSpawner : MonoBehaviour
 
     private void SpawnBall(ColorTypes color)
     {
-        //var position = new Vector3(Random.Range(-5f, 5f), Random.Range(-5f, 5f), 0f);
         var position = _positionGenerator.GetPosition();
         var ballObject = Instantiate(_ballPrefab, position, Quaternion.identity, _parent);
         ballObject.SetColor(color);

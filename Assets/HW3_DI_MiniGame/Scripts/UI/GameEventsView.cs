@@ -20,11 +20,6 @@ public class GameEventsView : MonoBehaviour
         AnimateConditionTextMove();
     }
 
-    //public void SetupOneColorButtonText(string buttonText)
-    //{
-    //    _oneColorButtonText.text = buttonText;
-    //}
-
     public void SetupEndGameText(string endGameText)
     {
         _endGameText.text = endGameText;

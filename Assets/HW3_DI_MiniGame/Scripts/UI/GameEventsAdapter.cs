@@ -8,8 +8,6 @@ public class GameEventsAdapter : MonoBehaviour
 
     private void Start()
     {
-        //_eventsView.SetupOneColorButtonText($"Pop all balls of color - {_gameController.ColorToPop.ToString()} to win!");
-
         _gameController.OnEndedGame += OnGameEnded;
         _gameController.OnSelectedCondition += OnShowConditionWinText;
     }

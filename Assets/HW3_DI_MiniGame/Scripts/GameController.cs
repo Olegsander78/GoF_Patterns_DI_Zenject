@@ -7,7 +7,6 @@ public class GameController : MonoBehaviour
 {
     public Action OnEndedGame;
     public Action<string> OnSelectedCondition;
-    //public event Action OnButtonConditionClicked;
 
     [SerializeField] private BallSpawner _ballSpawner;
     public ColorTypes ColorToPop { get => _colorToPop;}
@@ -27,7 +26,15 @@ public class GameController : MonoBehaviour
     private void Start()
     {
         Init();        
-    }    
+    }
+
+    private void OnDisable()
+    {
+        foreach (var ball in _ballSpawner.Balls)
+        {
+            ball.OnPuped -= CheckWinCondition;
+        }
+    }
 
     private void Init()
     {
@@ -89,13 +96,5 @@ public class GameController : MonoBehaviour
         var colorTypes = (ColorTypes[])Enum.GetValues(typeof(ColorTypes));
         int randomIndex = Random.Range(0, colorTypes.Length);
         return colorTypes[randomIndex];
-    }
-
-    private void OnDisable()
-    {
-        foreach (var ball in _ballSpawner.Balls)
-        {
-            ball.OnPuped -= CheckWinCondition;
-        }
-    }
+    }    
 }
